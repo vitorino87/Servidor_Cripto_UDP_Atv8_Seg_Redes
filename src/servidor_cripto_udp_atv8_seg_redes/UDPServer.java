@@ -19,6 +19,9 @@ class UDPServer {
             System.out.println("Servidor aguardando...");
             serverSocket.receive(receivePacket);
             sentence = new String(receivePacket.getData());
+            //int q = Integer.valueOf(sentence.substring(0, sentence.indexOf("|")));
+            //sentence = sentence.substring(sentence.indexOf("|")+1);
+            //sentence = sentence.substring(0, q);
             sentence = sentence.trim();
             System.out.println("Mensagem recebida: " + sentence);
             System.out.println("Para descriptografar a mensagem, digite a senha:");
@@ -26,7 +29,7 @@ class UDPServer {
             String senha = br.readLine();
             StringEncrypter c = new StringEncrypter(senha);
             sentence = c.decrypt(sentence);
-            System.out.println("Mensagem descriptografada: "+sentence);
+            System.out.println("Mensagem descriptografada: "+sentence);           
             InetAddress IPAddress = receivePacket.getAddress();
             int port = receivePacket.getPort();
             String capitalizedSentence = sentence.toUpperCase();
